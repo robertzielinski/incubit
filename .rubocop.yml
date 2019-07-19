@@ -1,9 +1,3 @@
-Rails:
-  Enabled: true
-
-Rails/HttpPositionalArguments:
-  Enabled: false
-
 AllCops:
   Exclude:
     - bin/*
@@ -19,9 +13,6 @@ Documentation:
   Enabled: false
 
 ClassAndModuleChildren:
-  Enabled: false
-
-Rails/SkipsModelValidations:
   Enabled: false
 
 Metrics/BlockLength:
