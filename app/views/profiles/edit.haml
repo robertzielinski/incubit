@@ -1,0 +1,19 @@
+%h1 Your account
+= form_for @user, url: profile_path do |form|
+  - if @user.errors.any?
+    .error.notification
+      = @user.errors.full_messages.join('. ')
+  .field
+    = form.label :username
+    = form.text_field :username
+  .field
+    = form.label :email
+    = form.text_field :email
+  .field
+    = form.label :password
+    = form.password_field :password
+  .field
+    = form.label :password_confirmation
+    = form.password_field :password_confirmation
+  .actions
+    = submit_tag 'Update'

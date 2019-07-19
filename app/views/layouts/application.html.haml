@@ -8,6 +8,8 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', data_turbolinks_track: 'reload'
   %body
+    = render 'layouts/notifications'
     - if user_signed_in?
+      = link_to 'Profile', edit_profile_path
       = link_to 'Log Out', destroy_auth_session_path, method: :delete
     = yield

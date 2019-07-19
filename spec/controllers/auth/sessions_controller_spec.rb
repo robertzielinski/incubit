@@ -6,14 +6,23 @@ describe Auth::SessionsController, type: :controller do
   describe 'GET new' do
     it 'should be successful' do
       get :new
-      expect(response).to be_success
+      expect(response).to have_http_status(:successful)
       expect(response).to render_template :new
     end
   end
 
   describe 'POST create' do
-    it 'should redirect to root page' do
+    subject do
       post :create, params: { email: user.email, password: user.password }
+    end
+
+    it 'should login user' do
+      subject
+      expect(user_signed_in?).to be true
+    end
+
+    it 'should redirect to root page' do
+      subject
       expect(response).to redirect_to root_path
     end
   end

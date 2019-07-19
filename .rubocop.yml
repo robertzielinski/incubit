@@ -19,6 +19,7 @@ Metrics/BlockLength:
   Exclude:
     - 'db/migrate/**/*'
     - 'config/**/*'
+    - 'spec/**/*.rb'
 Metrics/LineLength:
   Max: 100
   Exclude:
@@ -34,13 +35,14 @@ MethodCalledOnDoEndBlock:
   Exclude:
     - 'spec/**/*'
 
+PredicateName:
+  Enabled: false
+
 Style/FrozenStringLiteralComment:
   Enabled: false
 Style/Lambda:
   Enabled: false
 Style/NestedParenthesizedCalls:
-  Enabled: false
-Style/PredicateName:
   Enabled: false
 
 Layout/AlignParameters:
