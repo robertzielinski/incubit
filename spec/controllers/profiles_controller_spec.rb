@@ -12,7 +12,7 @@ describe ProfilesController, type: :controller do
       get :edit
     end
 
-    include_context :user_not_signed_in
+    include_context :user_should_be_logged_in
 
     it 'should be successful' do
       subject
@@ -22,16 +22,17 @@ describe ProfilesController, type: :controller do
   end
 
   describe 'POST update' do
+    let(:user_attrs) { attributes_for(:user) }
+
     subject do
-      post :update, params: { user: { email: user.email, password: user.password } }
+      post :update, params: { user: user_attrs }
     end
 
-    include_context :user_not_signed_in
+    include_context :user_should_be_logged_in
 
-    it 'should be successful' do
+    it 'should redirect to edit profile page' do
       subject
-      expect(response).to have_http_status(:successful)
-      expect(response).to render_template :edit
+      expect(response).to redirect_to edit_profile_path
     end
   end
 end

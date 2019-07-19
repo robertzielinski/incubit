@@ -1,4 +1,7 @@
 class Auth::SessionsController < Auth::BaseController
+  skip_before_action :user_not_logged_in!, only: %i[destroy]
+  before_action :authenticate_user!, only: %i[destroy]
+
   def new; end
 
   def create

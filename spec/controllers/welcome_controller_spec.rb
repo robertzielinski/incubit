@@ -12,7 +12,7 @@ describe WelcomeController, type: :controller do
       get :index
     end
 
-    include_context :user_not_signed_in
+    include_context :user_should_be_logged_in
 
     it 'should be successful' do
       subject

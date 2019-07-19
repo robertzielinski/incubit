@@ -7,10 +7,11 @@ class ProfilesController < ApplicationController
   def update
     if @user.update(user_params)
       flash[:notice] = 'Account was successfully updated!'
+      redirect_to edit_profile_path
     else
       flash[:alert] = 'Something went wrong! Account was not updated.'
+      render :edit
     end
-    render :edit
   end
 
   private
@@ -21,6 +22,6 @@ class ProfilesController < ApplicationController
 
   def user_params
     params.require(:user).
-      permit(:username, :email, :password, :password_confirmation)
+      permit(:email, :password, :password_confirmation)
   end
 end

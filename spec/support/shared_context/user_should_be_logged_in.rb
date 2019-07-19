@@ -1,4 +1,4 @@
-shared_context :user_not_signed_in do
+shared_context :user_should_be_logged_in do
   context 'when user is not signed in' do
     it 'should redirect to login page' do
       logout

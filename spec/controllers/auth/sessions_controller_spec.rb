@@ -4,8 +4,12 @@ describe Auth::SessionsController, type: :controller do
   let(:user) { create(:user) }
 
   describe 'GET new' do
+    subject { get :new }
+
+    include_context :user_should_be_logged_out
+
     it 'should be successful' do
-      get :new
+      subject
       expect(response).to have_http_status(:successful)
       expect(response).to render_template :new
     end
@@ -15,6 +19,8 @@ describe Auth::SessionsController, type: :controller do
     subject do
       post :create, params: { email: user.email, password: user.password }
     end
+
+    include_context :user_should_be_logged_out
 
     it 'should login user' do
       subject
