@@ -3,7 +3,12 @@ class User < ApplicationRecord
 
   before_create :set_username
 
-  validates :email, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: true,
+                    format: { with: EMAIL_REGEX,
+                              message: 'only allows valid emails' }
+  validates_length_of :password, minimum: 8
+  validates :username, presence: true, on: :update
+  validates_length_of :username, minimum: 5, on: :update, if: :username_changed?
 
   private
 
