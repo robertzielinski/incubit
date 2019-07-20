@@ -1,2 +1,18 @@
 %h1 Register
-= render 'shared/user_form', user: @user, url: auth_registration_path
+= form_for @user, url: auth_registration_path do |f|
+  - if @user.errors.any?
+    .error.notification
+      %ul
+        - @user.errors.full_messages.each do |message|
+          %li #{message}.
+  .field
+    = f.label :email
+    = f.text_field :email
+  .field
+    = f.label :password
+    = f.password_field :password
+  .field
+    = f.label :password_confirmation
+    = f.password_field :password_confirmation
+  .actions
+    = f.submit
