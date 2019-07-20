@@ -68,6 +68,12 @@ describe Auth::PasswordResetsController, type: :controller do
         subject
         expect(response).to redirect_to new_auth_password_reset_path
       end
+
+      it 'token expired' do
+        user.update_column(:password_reset_sent_at, Time.zone.now - 6.hours)
+        subject
+        expect(response).to redirect_to new_auth_password_reset_path
+      end
     end
   end
 
