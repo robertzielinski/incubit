@@ -1,0 +1,15 @@
+%h1 Set new password
+= form_for @user, url: auth_password_reset_path(email: params[:email], token: params[:token]) do |f|
+  - if @user.errors.any?
+    .error.notification
+      %ul
+        - @user.errors.full_messages.each do |message|
+          %li #{message}.
+  .field
+    = f.label :password
+    = f.password_field :password
+  .field
+    = f.label :password_confirmation
+    = f.password_field :password_confirmation
+  .actions
+    = f.submit 'Submit'

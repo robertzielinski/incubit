@@ -11,6 +11,11 @@ class User < ApplicationRecord
   validates :username, presence: true, on: :update
   validates_length_of :username, minimum: 5, on: :update, if: :username_changed?
 
+  def authenticate_via_token(token)
+    password_reset_token_digest == Digest::SHA1.hexdigest(token) &&
+      password_reset_sent_at > Time.zone.now - 6.hours
+  end
+
   def regenerate_password_reset_token
     reset_token = SecureRandom.hex(20)
     update_column(:password_reset_token_digest, Digest::SHA1.hexdigest(reset_token))

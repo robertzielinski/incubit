@@ -9,7 +9,7 @@ class ProfilesController < ApplicationController
       flash[:notice] = 'Account was successfully updated!'
       redirect_to edit_profile_path
     else
-      flash[:alert] = 'Something went wrong! Account was not updated.'
+      flash.now[:alert] = 'Something went wrong! Account was not updated.'
       render :edit
     end
   end
