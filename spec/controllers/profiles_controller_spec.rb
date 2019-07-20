@@ -38,9 +38,16 @@ describe ProfilesController, type: :controller do
         expect(response).to redirect_to edit_profile_path
       end
 
-      it 'should update user' do
+      it 'should update username' do
         subject
         expect(user.reload.username).to eq 'new_username'
+      end
+
+      it 'should not update email' do
+        user_attrs[:email] = 'new@email.com'
+        old_email = user.email
+        subject
+        expect(user.reload.email).to eq old_email
       end
     end
 
