@@ -35,7 +35,7 @@ describe Auth::RegistrationsController, type: :controller do
 
     context 'did not succeeded' do
       it 'should render edit form' do
-        user.update!(email: user_attrs[:email])
+        user_attrs[:password] = nil
         subject
         expect(response).to render_template :new
       end

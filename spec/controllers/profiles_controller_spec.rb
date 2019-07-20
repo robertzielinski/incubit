@@ -23,7 +23,7 @@ describe ProfilesController, type: :controller do
 
   describe 'POST update' do
     let(:user_attrs) do
-      attributes_for(:user, email: nil, username: 'new_username')
+      { username: 'new_username' }
     end
 
     subject do
