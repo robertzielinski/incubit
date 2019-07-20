@@ -37,7 +37,7 @@ describe User do
         to change { ActionMailer::Base.deliveries.count }.by(1)
     end
 
-    it 'does not send a welcome email on create' do
+    it 'does not send a welcome email on update' do
       user_build.save!
       expect { user_build.save! }.
         to change { ActionMailer::Base.deliveries.count }.by(0)
