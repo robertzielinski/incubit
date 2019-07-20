@@ -22,7 +22,9 @@ describe ProfilesController, type: :controller do
   end
 
   describe 'POST update' do
-    let(:user_attrs) { attributes_for(:user) }
+    let(:user_attrs) do
+      attributes_for(:user, email: nil, username: 'new_username')
+    end
 
     subject do
       post :update, params: { user: user_attrs }
@@ -30,9 +32,24 @@ describe ProfilesController, type: :controller do
 
     include_context :user_should_be_logged_in
 
-    it 'should redirect to edit profile page' do
-      subject
-      expect(response).to redirect_to edit_profile_path
+    context 'succeeded' do
+      it 'should redirect to edit profile page' do
+        subject
+        expect(response).to redirect_to edit_profile_path
+      end
+
+      it 'should update user' do
+        subject
+        expect(user.reload.username).to eq 'new_username'
+      end
+    end
+
+    context 'did not succeeded' do
+      it 'should render edit form' do
+        user_attrs[:username] = 'a'
+        subject
+        expect(response).to render_template :edit
+      end
     end
   end
 end
