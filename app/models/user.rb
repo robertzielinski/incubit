@@ -11,6 +11,14 @@ class User < ApplicationRecord
   validates :username, presence: true, on: :update
   validates_length_of :username, minimum: 5, on: :update, if: :username_changed?
 
+  def regenerate_password_reset_token
+    reset_token = SecureRandom.hex(20)
+    update_column(:password_reset_token_digest, Digest::SHA1.hexdigest(reset_token))
+    update_column(:password_reset_sent_at, Time.zone.now)
+
+    AuthMailer.password_reset_email(self, reset_token).deliver_now
+  end
+
   private
 
   def send_welcome_message

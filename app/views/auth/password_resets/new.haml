@@ -1,0 +1,7 @@
+%h1 Forgot password
+= form_for :password_reset, url: auth_password_reset_path do |f|
+  .field
+    = f.label :email
+    = f.email_field :email
+  .actions
+    = f.submit 'Submit', class: "btn btn-primary"

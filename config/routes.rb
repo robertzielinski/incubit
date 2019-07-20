@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resource :profile, only: %i[edit update]
 
   namespace :auth, path: '' do
+    resource :password_reset, only: %i[new create edit update]
+
     resource :registration, only: [], path: '' do
       get    :new,     path: 'sign-up',  as: 'new'
       post   :create,  path: 'sign-up'

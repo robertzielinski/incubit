@@ -31,16 +31,44 @@ describe User do
     end
   end
 
+  describe '#regenerate_password_reset_token' do
+    let!(:user) { create(:user) }
+
+    subject do
+      user.regenerate_password_reset_token
+    end
+
+    it 'should regenerate password reset token' do
+      expect { subject }.to change {
+        user.password_reset_token_digest
+      }.from(NilClass).to(String)
+    end
+
+    it 'should set new password reset sent at' do
+      expect { subject }.to change {
+        user.password_reset_sent_at
+      }.from(NilClass).to(ActiveSupport::TimeWithZone)
+    end
+
+    it 'sends a reset passsword email' do
+      expect { subject }.to change {
+        ActionMailer::Base.deliveries.count
+      }.by(1)
+    end
+  end
+
   describe '#send_welcome_message' do
     it 'sends a welcome email on create' do
-      expect { user_build.save! }.
-        to change { ActionMailer::Base.deliveries.count }.by(1)
+      expect { user_build.save! }.to change {
+        ActionMailer::Base.deliveries.count
+      }.by(1)
     end
 
     it 'does not send a welcome email on update' do
       user_build.save!
-      expect { user_build.save! }.
-        to change { ActionMailer::Base.deliveries.count }.by(0)
+      expect { user_build.save! }.to change {
+        ActionMailer::Base.deliveries.count
+      }.by(0)
     end
   end
 
