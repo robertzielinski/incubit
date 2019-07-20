@@ -5,14 +5,14 @@ describe WelcomeController, type: :controller do
 
   describe 'GET index' do
     before do
-      login_as(user)
+      signin_as(user)
     end
 
     subject do
       get :index
     end
 
-    include_context :user_should_be_logged_in
+    include_context :user_should_be_signed_in
 
     it 'should be successful' do
       subject

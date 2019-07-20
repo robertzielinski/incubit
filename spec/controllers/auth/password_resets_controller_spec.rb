@@ -6,7 +6,7 @@ describe Auth::PasswordResetsController, type: :controller do
   describe 'GET new' do
     subject { get :new }
 
-    include_context :user_should_be_logged_out
+    include_context :user_should_be_signed_out
 
     it 'should be successful' do
       subject
@@ -22,10 +22,10 @@ describe Auth::PasswordResetsController, type: :controller do
 
     subject { post :create, params: { password_reset: password_reset_attrs } }
 
-    include_context :user_should_be_logged_out
+    include_context :user_should_be_signed_out
 
     context 'succeeded' do
-      it 'should redirect to login page' do
+      it 'should redirect to signin page' do
         subject
         expect(response).to redirect_to new_auth_session_path
       end
@@ -82,7 +82,7 @@ describe Auth::PasswordResetsController, type: :controller do
 
     include_examples :should_validate_email_and_token
 
-    include_context :user_should_be_logged_out
+    include_context :user_should_be_signed_out
 
     it 'should be successful' do
       subject
@@ -100,10 +100,10 @@ describe Auth::PasswordResetsController, type: :controller do
 
     include_examples :should_validate_email_and_token
 
-    include_context :user_should_be_logged_out
+    include_context :user_should_be_signed_out
 
     context 'succeeded' do
-      it 'should redirect to login page' do
+      it 'should redirect to signin page' do
         subject
         expect(response).to redirect_to new_auth_session_path
       end

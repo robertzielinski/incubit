@@ -4,7 +4,7 @@ describe ProfilesController, type: :controller do
   let(:user) { create(:user) }
 
   before do
-    login_as(user)
+    signin_as(user)
   end
 
   describe 'GET edit' do
@@ -12,7 +12,7 @@ describe ProfilesController, type: :controller do
       get :edit
     end
 
-    include_context :user_should_be_logged_in
+    include_context :user_should_be_signed_in
 
     it 'should be successful' do
       subject
@@ -30,7 +30,7 @@ describe ProfilesController, type: :controller do
       post :update, params: { user: user_attrs }
     end
 
-    include_context :user_should_be_logged_in
+    include_context :user_should_be_signed_in
 
     context 'succeeded' do
       it 'should redirect to edit profile page' do

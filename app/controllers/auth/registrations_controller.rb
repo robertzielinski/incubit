@@ -6,7 +6,7 @@ class Auth::RegistrationsController < Auth::BaseController
   def create
     @user = User.new(user_params)
     if @user.save
-      login_as(@user)
+      signin_as(@user)
       redirect_to edit_profile_path, notice: 'Welcome to incubit!'
     else
       flash.now[:alert] = 'Something went wrong!'

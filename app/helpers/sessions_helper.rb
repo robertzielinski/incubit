@@ -11,11 +11,11 @@ module SessionsHelper
     current_user.present?
   end
 
-  def login_as(user)
+  def signin_as(user)
     session[:user_id] = user.id
   end
 
-  def logout
+  def signout
     session[:user_id] = nil
   end
 end

@@ -7,14 +7,14 @@ Rails.application.routes.draw do
     resource :password_reset, only: %i[new create edit update]
 
     resource :registration, only: [], path: '' do
-      get    :new,     path: 'sign-up',  as: 'new'
-      post   :create,  path: 'sign-up'
+      get    :new,     path: 'signup',  as: 'new'
+      post   :create,  path: 'signup'
     end
 
     resource :session, only: [], path: '' do
-      get    :new,     path: 'login',  as: 'new'
-      post   :create,  path: 'login'
-      delete :destroy, path: 'logout', as: 'destroy'
+      get    :new,     path: 'signin',  as: 'new'
+      post   :create,  path: 'signin'
+      delete :destroy, path: 'signout', as: 'destroy'
     end
   end
 end
