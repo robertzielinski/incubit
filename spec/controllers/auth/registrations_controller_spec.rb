@@ -22,13 +22,23 @@ describe Auth::RegistrationsController, type: :controller do
 
     include_context :user_should_be_logged_out
 
-    it 'should redirect to edit profile page' do
-      subject
-      expect(response).to redirect_to edit_profile_path
+    context 'succeeded' do
+      it 'should redirect to edit profile page' do
+        subject
+        expect(response).to redirect_to edit_profile_path
+      end
+
+      it 'should create a new user' do
+        expect { subject }.to change { User.count }
+      end
     end
 
-    it 'should create a new user' do
-      expect { subject }.to change { User.count }
+    context 'did not succeeded' do
+      it 'should render edit form' do
+        user.update!(email: user_attrs[:email])
+        subject
+        expect(response).to render_template :new
+      end
     end
   end
 end
