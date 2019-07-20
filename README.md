@@ -14,8 +14,8 @@ overcommit --sign
 Ruby version 2.6.3
 
 ```
+bundle
 rake db:create
 rake db:migrate
-bundle
 rails s
 ```
