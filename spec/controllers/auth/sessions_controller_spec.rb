@@ -16,20 +16,34 @@ describe Auth::SessionsController, type: :controller do
   end
 
   describe 'POST create' do
+    let(:login_attrs) do
+      { email: user.email, password: user.password }
+    end
+
     subject do
-      post :create, params: { email: user.email, password: user.password }
+      post :create, params: login_attrs
     end
 
     include_context :user_should_be_logged_out
 
-    it 'should login user' do
-      subject
-      expect(user_signed_in?).to be true
+    context 'succeeded' do
+      it 'should login user' do
+        subject
+        expect(user_signed_in?).to be true
+      end
+
+      it 'should redirect to root page' do
+        subject
+        expect(response).to redirect_to root_path
+      end
     end
 
-    it 'should redirect to root page' do
-      subject
-      expect(response).to redirect_to root_path
+    context 'did not succeeded' do
+      it 'should render edit form' do
+        login_attrs[:password] = 'wrong_password'
+        subject
+        expect(response).to render_template :new
+      end
     end
   end
 
