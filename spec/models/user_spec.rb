@@ -31,6 +31,19 @@ describe User do
     end
   end
 
+  describe '#send_welcome_message' do
+    it 'sends a welcome email on create' do
+      expect { user_build.save! }.
+        to change { ActionMailer::Base.deliveries.count }.by(1)
+    end
+
+    it 'does not send a welcome email on create' do
+      user_build.save!
+      expect { user_build.save! }.
+        to change { ActionMailer::Base.deliveries.count }.by(0)
+    end
+  end
+
   describe '#set_username' do
     context 'user is new' do
       it 'should set username as email prefix' do
