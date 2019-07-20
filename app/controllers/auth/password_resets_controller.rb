@@ -23,7 +23,7 @@ class Auth::PasswordResetsController < Auth::BaseController
       redirect_to new_auth_session_path, notice: 'Password changed!'
     else
       flash.now[:alert] = 'Something went wrong!'
-      render 'edit'
+      render :edit
     end
   end
 

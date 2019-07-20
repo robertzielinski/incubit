@@ -1,5 +1,4 @@
 %h1 Profile
-= render 'shared/user_form', user: @user, url: profile_path
 = form_for @user, url: profile_path do |f|
   - if @user.errors.any?
     .error.notification

@@ -10,7 +10,7 @@ class Auth::RegistrationsController < Auth::BaseController
       redirect_to edit_profile_path, notice: 'Welcome to incubit!'
     else
       flash.now[:alert] = 'Something went wrong!'
-      render 'new'
+      render :new
     end
   end
 
