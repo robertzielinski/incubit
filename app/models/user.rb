@@ -18,8 +18,8 @@ class User < ApplicationRecord
 
   def regenerate_password_reset_token
     reset_token = SecureRandom.hex(20)
-    update_column(:password_reset_token_digest, Digest::SHA1.hexdigest(reset_token))
-    update_column(:password_reset_sent_at, Time.zone.now)
+    update_columns(password_reset_token_digest: Digest::SHA1.hexdigest(reset_token),
+                   password_reset_sent_at: Time.zone.now)
 
     Auth::Mailer.password_reset_email(self, reset_token).deliver_now
   end
