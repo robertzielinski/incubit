@@ -1,4 +1,4 @@
-class AuthMailer < ApplicationMailer
+class Auth::Mailer < ApplicationMailer
   def welcome_message(user)
     @user = user
     mail(to: user.email, subject: 'Welcome to Incubit!')

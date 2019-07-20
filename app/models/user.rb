@@ -21,13 +21,13 @@ class User < ApplicationRecord
     update_column(:password_reset_token_digest, Digest::SHA1.hexdigest(reset_token))
     update_column(:password_reset_sent_at, Time.zone.now)
 
-    AuthMailer.password_reset_email(self, reset_token).deliver_now
+    Auth::Mailer.password_reset_email(self, reset_token).deliver_now
   end
 
   private
 
   def send_welcome_message
-    AuthMailer.welcome_message(self).deliver_now
+    Auth::Mailer.welcome_message(self).deliver_now
   end
 
   def set_username
