@@ -9,4 +9,13 @@ bundle install --gemfile=.overgems.rb
 overcommit --sign
 ```
 
-## Project set up locally
+## Run locally
+
+Ruby version 2.6.3
+
+```
+rake db:create
+rake db:migrate
+bundle
+rails s
+```
