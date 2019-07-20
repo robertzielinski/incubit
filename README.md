@@ -15,7 +15,15 @@ Ruby version 2.6.3
 
 ```
 bundle
-rake db:create
-rake db:migrate
-rails s
+bundle exec rake db:create
+bundle exec rake db:migrate
+bundle exec rails s
+```
+
+## Run tests
+
+```
+bundle exec rake db:create RAILS_ENV=test
+bundle exec rake db:schema:load RAILS_ENV=test
+bundle exec rake rspec
 ```
