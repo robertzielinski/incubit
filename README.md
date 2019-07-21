@@ -13,9 +13,16 @@ overcommit --sign
 
 Ruby version 2.6.3
 
-Set reCAPTCHA v2 Checkbox ("I'm not a robot" Checkbox) keys in .env file.
+Set reCAPTCHA v2 Checkbox ("I'm not a robot" Checkbox) keys in `.env` file.
 You can get your own keys [here](https://www.google.com/recaptcha).
-Keys provided below are just sample keys to run project quickly on localhost. Generate your own and keep securely when deploying on production.
+
+Keys provided below are just sample keys to run project quickly on localhost.
+Generate your own and keep securely when deploying on production!
+
+The main purpose of using reCAPTCHA is protection from:
+ - robots registering multiple accounts
+ - robots trying to login as existing user
+ - robots checking existing emails
 
 ```
 RECAPTCHA_SITE_KEY = '6Le4r64UAAAAALdE2Pouj83oy01nKySAHukpxEzF'
