@@ -5,6 +5,9 @@ class Auth::RegistrationsController < Auth::BaseController
 
   def create
     @user = User.new(user_params)
+
+    verify_recaptcha!(fallback_action: :new) { return }
+
     if @user.save
       signin_as(@user)
       redirect_to edit_profile_path, notice: 'Welcome to incubit!'

@@ -5,8 +5,10 @@ class Auth::SessionsController < Auth::BaseController
   def new; end
 
   def create
+    verify_recaptcha!(fallback_action: :new) { return }
+
     user = User.find_by_email(params[:email])
-    if user&.authenticate(params[:password])
+    if verify_recaptcha(model: user) && user&.authenticate(params[:password])
       signin_as(user)
       redirect_to root_url, notice: 'signed in'
     else

@@ -5,6 +5,8 @@ class Auth::PasswordResetsController < Auth::BaseController
   def new; end
 
   def create
+    verify_recaptcha!(fallback_action: :new) { return }
+
     user = User.find_by_email(params[:password_reset][:email])
     if user
       user.regenerate_password_reset_token

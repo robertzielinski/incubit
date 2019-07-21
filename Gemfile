@@ -23,6 +23,8 @@ gem 'uglifier', '>= 1.3.0'
 # Security
 
 gem 'bcrypt', '~> 3.1.12'
+gem 'dotenv-rails'
+gem 'recaptcha'
 
 group :development do
   gem 'letter_opener'
