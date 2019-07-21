@@ -1,0 +1,15 @@
+%nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  #navbarNav
+    %ul.navbar-nav
+      - if user_signed_in?
+        %li.nav-item
+          = link_to 'Main page', root_path, class: 'nav-link'
+        %li.nav-item
+          = link_to 'Profile', edit_profile_path, class: 'nav-link'
+        %li.nav-item
+          = link_to 'Log Out', destroy_auth_session_path, class: 'nav-link', method: :delete
+      - else
+        %li.nav-item
+          = link_to 'Register', new_auth_registration_path, class: 'nav-link'
+        %li.nav-item
+          = link_to 'Log In', new_auth_session_path, class: 'nav-link'

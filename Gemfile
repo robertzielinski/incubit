@@ -13,6 +13,7 @@ gem 'puma', '~> 4.0.1'
 
 # Frontend
 
+gem 'bootstrap', '~> 4.3.1'
 gem 'coffee-rails', '>= 5.0.0'
 gem 'haml', '>= 5.1.1'
 gem 'haml-rails'
